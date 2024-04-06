@@ -30,6 +30,31 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+              publicKey: "CPGjEoBwhHnjS0DjL",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // these IDs from the previous steps
+                emailjs.sendForm('service_n6s9oir', 'contact_form', this)
+                    .then(() => {
+                        console.log('SUCCESS!');
+                        window.alert("Thankyou for Contacting Us,We will reply soon")
+                    }, (error) => {
+                        console.log('FAILED...', error);
+                        window.alert("Failed to send Message")
+                    });
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -126,29 +151,29 @@
                             <h1 class="display-5 mb-4">Free Quote</h1>
                         </div>
                         <p class="mb-4 pb-2">Make your Quotes and touch with us</p>
-                       <form action="https://formsubmit.io/send/akshaykottappurath366@gmail.com" method=”POST”>
+                       <form id="contact-form">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                        <input type="text" class="form-control" name="user_name" id="name" placeholder="Your Name">
                                         <label for="name">Your Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                        <input type="email" class="form-control" name="user_email" id="email" placeholder="Your Email">
                                         <label for="email">Your Email</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                        <input type="text" class="form-control" id="subject"  name="subject" placeholder="Subject">
                                         <label for="subject">Subject</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                        <textarea class="form-control" placeholder="Leave a message here" name="message" id="message" style="height: 100px"></textarea>
                                         <label for="message">Message</label>
                                     </div>
                                 </div>
